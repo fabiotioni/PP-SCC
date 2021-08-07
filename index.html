@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Posto Periferico SCC</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+
+	<style>
+	/* Style the Image Used to Trigger the Modal */
+	#myImg {
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: 0.3s;
+	}
+	
+
+	#myImg:hover {opacity: 0.7;}
+	
+
+	/* The Modal (background) */
+	.modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 50px; /* Location of the box */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+	}
+	
+
+	/* Modal Content (Image) */
+	.modal-content {
+	  margin: auto;
+	  display: block;
+	  width: 100%;
+	  max-width: 900px;
+	}
+	
+
+	/* Caption of Modal Image (Image Text) - Same Width as the Image */
+	#caption {
+	  margin: auto;
+	  display: block;
+	  width: 100%;
+	  max-width: 900px;
+	  text-align: center;
+	  color: #ccc;
+	  padding: 10px 0;
+	  height: 150px;
+	}
+	
+
+	/* Add Animation - Zoom in the Modal */
+	.modal-content, #caption {
+	  animation-name: zoom;
+	  animation-duration: 0.6s;
+	}
+	
+
+	@keyframes zoom {
+	  from {transform:scale(0)}
+	  to {transform:scale(1)}
+	}
+	
+
+	/* The Close Button */
+	.close {
+	  position: absolute;
+	  top: 15px;
+	  right: 35px;
+	  color: #f1f1f1;
+	  font-size: 40px;
+	  font-weight: bold;
+	  transition: 0.3s;
+	}
+	
+
+	.close:hover,
+	.close:focus {
+	  color: #bbb;
+	  text-decoration: none;
+	  cursor: pointer;
+	}
+	
+
+	/* 100% Image Width on Smaller Screens */
+	@media only screen and (max-width: 900px){
+	  .modal-content {
+	    width: 100%;
+	  }
+	}
+
+
+	</style>
+
+
+
+
+</head>
+<body class="multiple-scenes ">
+
+<div id="pano"></div>
+
+
+
+	<div id="myModal" class="modal">
+	  <span class="close">&times;</span>
+	  <img class="modal-content" id="img01">
+	  <div id="caption"></div>
+	</div>
+
+
+
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-primo-binario">
+        <li class="text">Primo binario</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-ingresso-um">
+        <li class="text">Ingresso UM</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-vista-tdpbm">
+        <li class="text">Vista TDP/BM</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-ppt-vista-fronte">
+        <li class="text">PPT vista fronte</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-armadi-circolazione">
+        <li class="text">Armadi Circolazione</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-armadi-ccsreteqtum">
+        <li class="text">Armadi CCS/Rete/QTUM</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-armadio-dem-12">
+        <li class="text">Armadio DeM 1/2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-armadio-dem-22-e-retro-rete">
+        <li class="text">Armadio DeM 2/2 e retro Rete</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-armadi-dem-retro">
+        <li class="text">Armadi DeM retro</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-armadio-ccs-retro">
+        <li class="text">Armadio CCS retro</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-armadio-circ-retro">
+        <li class="text">Armadio Circ retro</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-armadio-dem-aperto">
+        <li class="text">Armadio DeM aperto</li>
+      </a>
+    
+  </ul>
+</div>
+
+<div id="titleBar">
+  <h1 class="sceneName"></h1>
+</div>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
